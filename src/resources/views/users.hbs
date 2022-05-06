@@ -1,0 +1,299 @@
+<div class="container-content">
+    <div class="pt-3">
+        <h2 class="text-center cl-cray">QUẢN LÝ NHÂN SỰ</h2>
+        <div class="d-flex flex-row-reverse bd-highlight mr-3">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal">
+                Thêm mới
+            </button>
+            <button type="button" class="btn btn-outline-danger mb-2 mr-3">
+                Kho lưu trữ
+            </button>
+        </div>
+    </div>
+    <div class="content container-fluid mt-3">
+        <table class="table table-hover table-sm mt-3 ml-3 mr-3" id="customer-table">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">#</th>
+                    <th scope="col">Họ tên</th>
+                    <th scope="col">Giới tính</th>
+                    <th scope="col">Ngày sinh</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Địa chỉ</th>
+                    <th scope="col">Quận / Huyện</th>
+                    <th scope="col">Tỉnh / Thành phố</th>
+                    <th scope="col">Số điện thoại 1</th>
+                    <th scope="col">Chức vụ</th>
+                    {{!-- <th scope="col">Vai trò</th> --}}
+                    {{!-- <th scope="col">Quyền hạn</th> --}}
+                    {{!-- <th scope="col">Mô tả</th> --}}
+                    {{!-- <th scope="col">Hình ảnh</th> --}}
+                    <th scope="col">Hành động</th>
+                </tr>
+            </thead>
+            <tbody class="scroll-table">
+                {{#each products}}
+                <tr class="text-center">
+                    <th scope="row">{{this.productId}}</th>
+                    <td><a href="" class="text-decoration-none" data-toggle="modal" data-id="{{this._id}}"
+                            data-customer-detail-fisrt-name="{{this.fisrtName}}"
+                            data-customer-detail-middle-name="{{this.middleName}}"
+                            data-customer-detail-last-name="{{this.lastName}}" data-detail-gender="{{this.gender}}"
+                            data-customer-detail-email="{{this.email}}"
+                            data-customer-detail-phone="{{this.phoneNumber}}"
+                            data-customer-detail-address="{{this.address}}"
+                            data-customer-detail-district="{{this.district}}"
+                            data-customer-detail-cityprovince="{{this.cityProvince}}" {{!--
+                            data-customer-detail-description="{{this.description}}" --}}
+                            data-target="#modal-detail-customer">{{this.fisrtName}} {{this.middleName}}
+                            {{this.lastName}}</a></td>
+                    <td>{{this.price}}</td>
+                    {{!-- <td><a type="button" class="text-decoration-none text-info" data-toggle="tooltip"
+                            data-placement="top" title="{{this.email}}">{{this.location}}</a></td> --}}
+                    <td>{{this.width}}</td>
+                    <td>{{this.height}}</td>
+                    <td>{{this.numberOfFloors}}</td>
+                    <td><a type="button" class="text-decoration-none text-info" data-toggle="tooltip"
+                            data-placement="top" title="{{this.address}}">{{this.address}}</a></td>
+                    <td>{{this.district}}</td>
+                    <td>{{this.city}}</td>
+                    {{!-- <td>{{this.description}}</td> --}}
+                    {{!-- <td>{{this.images}}</td> --}}
+                    <td class="text-center">
+                        <button type="button" class="btn btn-outline-info btn-sm mr-2" data-toggle="modal"
+                            data-id="{{this._id}}" data-customer-name="{{this.customerName}}"
+                            data-gender="{{this.gender}}" data-customer-email="{{this.email}}"
+                            data-customer-phone="{{this.phoneNumber}}" data-customer-address="{{this.address}}"
+                            data-customer-district="{{this.district}}"
+                            data-customer-cityprovince="{{this.cityProvince}}"
+                            data-customer-description="{{this.description}}" data-target="#modal-edit">Chỉnh
+                            sửa</button>
+                        <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal"
+                            data-id="{{this._id}}" data-customer-name="{{this.customerName}}"
+                            data-target="#modal-delete">
+                            Lưu trữ
+                        </button>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal Detail-->
+<div class="modal fade" id="modal-detail-customer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Chi tiết sản phẩm</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ... Biến bự lên coi
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Add-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm sản phẩm mới</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/products/store">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="productId">Mã sản phẩm</label>
+                            <input type="text" class="form-control" id="productId" name="productId">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="productName">Tên sản phẩm</label>
+                            <input type="text" class="form-control" id="productName" name="productName">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="price">Giá bán</label>
+                            <input type="text" class="form-control" id="price" name="price">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="height">Chiều dài</label>
+                            <input type="text" class="form-control" id="height" name="height">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="width">Chiều rộng</label>
+                            <input type="text" class="form-control" id="width" name="width">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="numberOfFloors">Số tầng</label>
+                            <input type="text" class="form-control" id="numberOfFloors" name="numberOfFloors">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="location">Vị trí</label>
+                            <input type="text" class="form-control" id="localtion" name="localtion">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="address">Địa chỉ</label>
+                            <input type="text" class="form-control" id="address"
+                                placeholder="1234 Đường Trần Hưng Đạo, phường 5" name="address">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="district">Quận / Huyện</label>
+                            <select id="district" class="form-control">
+                                <option selected>Chọn Quận / Huyện...</option>
+                                <option value="">...</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputState">Tỉnh / Thành phố</label>
+                            <select id="inputState" class="form-control">
+                                <option selected>Chọn Tỉnh / Thành phố...</option>
+                                <option value="">...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Mô tả</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="images">Thêm hình ảnh</label>
+                        <input type="file" class="form-control-file" id="images" name="images">
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">An item</li>
+                    </ul>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit-->
+<div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Sửa thông tin sản phẩm</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="inputCity">Mã sản phẩm</label>
+                            <input type="text" class="form-control" id="inputCity">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputState">Tên sản phẩm</label>
+                            <input type="text" class="form-control" id="inputCity">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputZip">Giá bán</label>
+                            <input type="text" class="form-control" id="inputZip">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="inputEmail4">Chiều dài</label>
+                            <input type="text" class="form-control" id="inputEmail4">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputPassword4">Chiều rộng</label>
+                            <input type="text" class="form-control" id="inputPassword4">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputEmail4">Số tầng</label>
+                            <input type="text" class="form-control" id="inputEmail4">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputPassword4">Vị trí</label>
+                            <input type="text" class="form-control" id="inputPassword4">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputAddress">Địa chỉ</label>
+                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputState">Quận / Huyện</label>
+                            <select id="inputState" class="form-control">
+                                <option selected>Chọn Quận / Huyện...</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputState">Tỉnh / Thành phố</label>
+                            <select id="inputState" class="form-control">
+                                <option selected>Chọn Tỉnh / Thành phố...</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Mô tả</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Thêm hình ảnh</label>
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">An item</li>
+                    </ul>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-info">Lưu lại</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Delete-->
+<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Lưu trữ sản phẩm</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-danger">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+</div>
